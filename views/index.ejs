@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenCare</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>GenCare</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Save Up To 90% On Medicines</h1>
+    </div>
+
+    <div class="search-filter">
+        <input type="text" placeholder="Search for a medicine...">
+        <button>Filter</button>
+        <button>Search</button>
+    </div>
+
+    <h2 style="text-align: center; margin: 1rem 0;">View All Medicines</h2>
+    <div class="medicine-cards">
+        <% if (DrugList.length > 0) { %>
+            <% DrugList.forEach(drug => { %>
+                <div class="card">
+                    <h3><%= drug.name %></h3>
+                    <p><%= drug.description || "No description available." %></p>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No medicines available.</p>
+        <% } %>
+    </div>
+
+    <div class="map-section">
+        <h2>Find Nearby Locations</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345094183!2d144.95373531531746!3d-37.81627974202166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf5776d1a8e5b6c0!2sMelbourne!5e0!3m2!1sen!2sau!4v1603072895164!5m2!1sen!2sau"></iframe>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 GenCare - Generic Medicine Awareness</p>
+    </footer>
+</body>
+</html>

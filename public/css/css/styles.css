@@ -1,0 +1,653 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+
+    height: 50vh;
+    width: 100vw;
+    color: white;
+    padding: 1rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(45deg, #24c57afb, #097966b2);
+
+    
+}
+header .top{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+header .top nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+    font-weight: 500;
+    transition: all 0.5ms ease;
+}
+
+header .top nav a:hover {
+    text-decoration: underline;
+    transform: scale(1.15);
+}
+
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.hero {
+    text-align: center;
+    padding: 2rem;
+    background-color: #e8f5e9;
+}
+
+#new {
+    border-radius: 10%;
+    color: #fff;
+}
+.hero h1 a {
+    text-decoration: none;
+    color: #000;
+    transition: all 5ms ease;
+}
+.heor h1 a:hover{
+    transform: scale(1.05);
+    color: blue;
+}
+
+.search-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.search-filter input, .search-filter button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-filter button {
+    background-color: #00796b;          
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.search-filter button:hover {
+    background-color: #0f7e71;
+}
+button{
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #00796b;          
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0f7e71;
+}
+.medicine-cards {
+    display: flex;
+    flex-wrap: wrap; /* Enables wrapping into two rows */
+    overflow-x: auto; /* Allows horizontal scrolling */
+    gap: 1rem; /* Adds space between cards */
+    height: 80vh; /* Adjust as needed for the two-row layout */
+    width: 90vw;
+    margin: 0 auto;
+    scroll-behavior: smooth; /* Optional: Smooth scrolling effect */
+}
+
+.card {
+    flex: 0 0 calc(25%); /* Each card takes 25% of the container minus the gap */
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* text-align: center; */
+    margin: 0.5rem 0; /* Adds vertical spacing between rows */
+}
+
+.medicine-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.hidden {
+        display: none;
+    }
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin: 10px;
+        padding: 1.3rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .card:hover{
+        transform: scale(1.05);
+    }
+    .card-header h3 {
+        margin: 0;
+        font-size: 1.5em;
+    }
+    .card-body {
+        margin-top: 10px;
+    }
+    .locate-store {
+        background-color: #00796b;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    .toggle-details {
+        background-color: #ccc;
+        border: 1px solid #ccc;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .card-details {
+        margin-top: 10px;
+        padding: 10px;
+        border-top: 1px solid #ddd;
+    }
+    .highlight {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+.map-section {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.map-section iframe {
+    width: 90%;
+    height: 300px;
+    border: none;
+}
+
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+
+/* //////////////////////////////////////////////////////////////////////// */
+.medicine-cards::-webkit-scrollbar {
+    height: 10px; /* Adjust the height of the scrollbar */
+}
+
+.medicine-cards::-webkit-scrollbar-thumb {
+    background: #4CAF50;
+    border-radius: 5px;
+}
+
+.medicine-cards::-webkit-scrollbar-track {
+    background: #ddd;
+}
+/* //////////////////////////////////////////////////////////////////////// */
+
+.generic-medicines h2{
+    text-align: center;
+  color: #00796b;
+  margin-bottom: 10px;
+}
+
+.generic-medicines .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+.generic-medicines .intro {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+.generic-medicines .benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+.generic-medicines .benefits .card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+.generic-medicines .benefits .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+.generic-medicines .benefits .card h3 {
+    color: #00796b;
+    margin-bottom: 10px;
+  }
+.generic-medicines .benefits .card p {
+    font-size: 0.95rem;
+    color: #555;
+  }
+.generic-medicines .initiatives {
+    background: #e0f2f1;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 8px;
+  }
+.generic-medicines .initiatives h3 {
+    color: #004d40;
+  }
+.generic-medicines .initiatives ul {
+    list-style: disc;
+    padding-left: 20px;
+  }
+  .generic-medicines .initiatives li {
+    margin: 10px 0;
+    font-size: 0.95rem;
+  }
+  .charts canvas {
+    max-width: 600px;
+    margin: 0 auto;
+    display: inline;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+/* Media Query for Tablet Screens */
+@media (max-width: 1024px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .medicine-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .medicine-cards .card {
+        width: 90%;
+    }
+
+    .generic-medicines .benefits {
+        grid-template-columns: 1fr;
+    }
+
+    header nav {
+        display: none;
+        flex-direction: column;
+    }
+
+    .hamburger-menu {
+        display: block;
+    }
+}
+
+  @media (max-width: 768px) {
+    .search-filter {
+        flex-direction: column;
+    }
+    .search-filter input{
+        width: 80vw;
+        margin: 0 auto;
+    }
+    .search-filter button {
+        width: 150px;
+        margin: 0 auto;
+    }
+
+    .medicine-cards {
+        flex-direction: column;
+        
+    }
+
+    header nav a {
+        margin-left: 0.5rem;
+    }
+}
+@media (max-width: 768px) {
+    header {
+        width: 100vw;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .top{
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+    header nav {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .cta-button {
+        margin-top: 1rem;
+    }
+}
+@media (max-width: 1024px) {
+    header {
+        width: 100vw;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .top{
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+    header nav {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .cta-button {
+        margin-top: 1rem;
+    }
+}
+
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode header {
+    background: linear-gradient(45deg, #1f4037, #36644f);
+}
+
+body.dark-mode nav a {
+    color: #b3ffab;
+}
+
+body.dark-mode .hero {
+    background-color: #1e1e1e;
+    color: #cfcfcf;
+}
+
+body.dark-mode .medicine-cards .card {
+    background: #292929;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+body.dark-mode .search-filter input,
+body.dark-mode .search-filter button {
+    background-color: #333;
+    color: #ddd;
+    border-color: #444;
+}
+
+body.dark-mode footer {
+    background-color: #1f4037;
+    color: #b3ffab;
+}
+
+body.dark-mode .generic-medicines .benefits .card {
+    background: #333;
+    color: #ddd;
+    border: 1px solid #444;
+}
+
+body.dark-mode .generic-medicines .initiatives {
+    background: #1e1e1e;
+    color: #ccc;
+}
+
+body.dark-mode .charts canvas {
+    background: #292929;
+}
+body.dark-mode .benefits .card p{
+    color: #fff;
+}
+
+.explanation {
+    padding: 1rem 12rem 1rem 12rem;
+
+    text-wrap: pretty;
+    background-color: #e7e4df;
+    margin-top:-10;
+    color: #3c4e3d;
+}
+
+.explanation .what-is {
+    opacity: 0; 
+    transform: translateX(-100px); 
+    transition: opacity 3s ease, transform 3s ease;
+    font-size: 30px;
+  }
+  
+  .explanation .what-is.visible {
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+
+.explanation .content {
+    opacity: 0; 
+    transform: translateX(-6rem); 
+    transition: opacity 4s ease, transform 4s ease; 
+  }
+  
+  .explanation .content.visible {
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+  
+  .core-attributes {
+    text-align: center;
+    margin: 3rem 0;
+    opacity: 0; 
+    transform: translateY(3rem);
+    transition: all 0.6s ease-out;
+  }
+  
+  .core-attributes.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  
+  .core-attributes h1 {
+    font-size: 2em;
+    margin-bottom: 1.5rem;
+  }
+  
+  .boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    justify-items: center;
+  }
+  
+  .box {
+    width: 28vw;
+    height: 27vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 1.2em;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s ease;
+    border-radius: 2rem;
+    border: 0.1rem solid black;
+    margin:0;
+    background-color: #00796b;
+  } 
+  .top-left {
+    transform-origin: left center;
+  }
+  
+  .top-center {
+    transform-origin: top center;
+  }
+  
+  .top-right {
+    transform-origin: right center;
+  }
+  
+  .bottom-left {
+    transform-origin: left bottom;
+  }
+  
+  .bottom-center {
+    transform-origin: bottom center;
+  }
+  
+  .bottom-right {
+    transform-origin: right bottom;
+  }
+  
+  .box.show {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .box.top-left.show {
+    animation: slideInFromLeft 2s forwards;
+  }
+  
+  .box.top-center.show {
+    animation: slideInFromTop 2s forwards;
+  }
+  
+  .box.top-right.show {
+    animation: slideInFromRight 2s forwards;
+  }
+  
+  .box.bottom-left.show {
+    animation: slideInFromLeft 2s forwards;
+  }
+  
+  .box.bottom-center.show {
+    animation: slideInFromBottom 2s forwards;
+  }
+  
+  .box.bottom-right.show {
+    animation: slideInFromRight 2s forwards;
+  }
+  
+  @keyframes slideInFromLeft {
+    from {
+      transform: translateX(-100%) scale(0.8);
+    }
+    to {
+      transform: translateX(0) scale(1);
+    }
+  }
+  
+  @keyframes slideInFromTop {
+    from {
+      transform: translateY(-100%) scale(0.8);
+    }
+    to {
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%) scale(0.8);
+    }
+    to {
+      transform: translateX(0) scale(1);
+    }
+  }
+  
+  @keyframes slideInFromBottom {
+    from {
+      transform: translateY(100%) scale(0.8);
+    }
+    to {
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  
+  #dynamic-text {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeIn 3s ease-in-out forwards;
+    white-space: nowrap;
+  }
+  
+  .additional-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:2rem;
+    opacity: 0;
+    transition: opacity 1s;
+  }
+
+  .paracetamol img {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: transform 1s ease, opacity 1s ease;
+  }
+  
+  .additional-text.show {
+    opacity: 1;
+  }
+  
+  .additional-text.show .paracetamol img {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  #map {
+    height: 500px;
+    width: 100%;
+  }

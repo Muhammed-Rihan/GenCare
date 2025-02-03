@@ -5,24 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GenCare</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="assets/favicon.png" type="image/png">
 </head>
-<body>
+<body>  
     <header>
-        <h1>GenCare</h1>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-        </nav>
+        <div class="top">
+            <h1><div class="logo" style="height: 5vh; width: 5vh;"><img src="/assets/logo.jpeg" alt="" style="height: 5vh; width: 5vh;"></div>GenCare</h1>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <!-- Dark Mode Toggle -->
+                <button id="dark-mode-toggle">Dark Mode</button>
+            </nav>
+        </div>
+            <div class="content">
+                <h1>Affordable Medicines, Accessible Care</h1>
+                <p>The future of healthcare is affordable and effective. Discover the benefits of choosing generic medicines today.</p>
+            </div>
+            <div class="empty">
+                <!-- do not write anything here -->
+            </div>
+
     </header>
+   
+</div>
+
 
     <div class="hero">
-        <h1>Save Up To 90% On Medicines</h1>
+        <h1>Choose Generics. Choose Smart.</h1>
+        <button><h1><a href="/views/genmed.ejs" id="new">What are generic medicines?</a></h1></button>
     </div>
 
     <div class="search-filter">
         <input type="text" placeholder="Search for a medicine...">
-        <button>Filter</button>
         <button>Search</button>
     </div>
 
@@ -31,22 +47,296 @@
         <% if (DrugList.length > 0) { %>
             <% DrugList.forEach(drug => { %>
                 <div class="card">
-                    <h3><%= drug.name %></h3>
-                    <p><%= drug.description || "No description available." %></p>
+                    <div class="card-header">
+                        <h3><%= drug.name %></h3>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Description:</strong> <%= drug.description || "No description available." %></p>
+                        <p><strong>Price:</strong> <span class="price"><%= drug.price %> INR</span></p>
+                        <button class="locate-store"><a href="views\map.ejs" style="text-decoration: none; color: white;">Locate Store</a></button>
+                        <button class="toggle-details" onclick="toggleDetails(this)">▼</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <p><strong>Chemical Composition:</strong> <%= drug.chemicalcomposition || "Data not available" %></p>
+                        <p><strong>Cheaper By Percentage:</strong> <span class="highlight"><%= drug.cheaperbypercentage || "N/A" %>%</span></p>
+                        <p><strong>Similarity to Standard:</strong> <span class="highlight"><%= drug.similaritytostandard || "N/A" %>%</span></p>
+                    </div>
+                    <div class="card-footer">
+                        GenCare
+                    </div>
                 </div>
             <% }); %>
         <% } else { %>
             <p>No medicines available.</p>
         <% } %>
     </div>
-
+    
     <div class="map-section">
-        <h2>Find Nearby Locations</h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345094183!2d144.95373531531746!3d-37.81627974202166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf5776d1a8e5b6c0!2sMelbourne!5e0!3m2!1sen!2sau!4v1603072895164!5m2!1sen!2sau"></iframe>
+        <h2><button><a href="views\map.ejs" style="text-decoration: none; color: white;">Find Nearby stores</a></button>
+    </h2>
     </div>
+    <section class="generic-medicines">
+        <div class="container">
+          <h2>Why Choose Generic Medicines?</h2>
+          <p class="intro">
+            Generic medicines are affordable, effective, and meet the same safety standards as branded ones. Here's why you should consider them:
+          </p>
+      
+          <!-- Benefits Section -->
+          <div class="benefits">
+            <div class="card">
+              <h3>Affordable and Cost-Effective</h3>
+              <p>Generic medicines can cost up to 85% less than branded medicines, making healthcare accessible to everyone.</p>
+            </div>
+            <div class="card">
+              <h3>Equally Effective</h3>
+              <p>Generic medicines meet the same rigorous standards as branded ones and are just as effective.</p>
+            </div>
+            <div class="card">
+              <h3>Promotes Healthcare Accessibility</h3>
+              <p>Generics make essential medications accessible to low-income families, reducing overall healthcare costs.</p>
+            </div>
+            <div class="card">
+              <h3>Encourages Healthy Competition</h3>
+              <p>Generic medicines foster competition, lowering the prices of medicines overall.</p>
+            </div>
+          </div>
+      
+          <!-- Government Initiatives -->
+          <div class="initiatives">
+            <h3>Government Initiatives</h3>
+            <ul>
+              <li>
+                <strong>Jan Aushadhi Yojana:</strong> Ensures high-quality generic medicines are affordable and widely available.
+              </li>
+              <li>
+                <strong>Awareness Campaigns:</strong> Educating the public about the safety and benefits of generics.
+              </li>
+              <li>
+                <strong>Subsidies and Incentives:</strong> Encouraging pharmacies to stock and promote generic alternatives.
+              </li>
+            </ul>
+          </div>
+      
+          <!-- Interactive Visuals -->
+          <div class="charts">
+            <h3>Visuals</h3>
+            <canvas id="costComparisonChart"></canvas>
+            <p>Many people have started to adopt Generic med over Standard ones in few years</p>
+            <canvas id="adoptionRateChart"></canvas>
+          </div>
+          
+      
+          <!-- Call to Action -->
+          <div class="cta">
+            <p>Talk to your doctor today and ask about generic alternatives for your prescriptions.</p>
+            <a href="#" class="cta-button">Find Nearby Stores</a>
+          </div>
+        </div>
+      </section>
 
     <footer>
         <p>&copy; 2024 GenCare - Generic Medicine Awareness</p>
     </footer>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // js for darkmode
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+
+    const ctx1 = document.getElementById('costComparisonChart').getContext('2d');
+    const costComparisonChart = new Chart(ctx1, {
+    type: 'pie',
+    data: {
+        labels: ['Branded Medicines', 'Generic Medicines'],
+        datasets: [
+        {
+            data: [80, 20], // Example percentage data
+            backgroundColor: ['#f44336', '#4caf50'],
+            borderWidth: 1,
+        },
+        ],
+    },
+    options: {
+        plugins: {
+        legend: {
+            display: true,
+            position: 'bottom',
+        },
+        },
+    },
+    });
+
+    const ctx2 = document.getElementById('adoptionRateChart').getContext('2d');
+    const adoptionRateChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['2010', '2015', '2020', '2025'], // Example years
+        datasets: [
+        {
+            label: 'Adoption Rate (%)',
+            data: [40, 55, 70, 85], // Example data
+            backgroundColor: '#2196f3',
+            borderWidth: 1,
+        },
+        ],
+    },
+    options: {
+        scales: {
+        y: {
+            beginAtZero: true,
+            title: {
+            display: true,
+            text: 'Adoption Rate (%)',
+            },
+        },
+        x: {
+            title: {
+            display: true,
+            text: 'Year',
+            },
+        },
+        },
+        plugins: {
+        legend: {
+            display: false,
+        },
+        },
+    },
+    });
+
+
+
+    // JavaScript function to toggle details visibility
+    function toggleDetails(button) {
+        const cardDetails = button.closest('.card').querySelector('.card-details');
+        cardDetails.classList.toggle('hidden');
+        button.textContent = cardDetails.classList.contains('hidden') ? '▼' : '▲';
+    }
+
+    const searchInput = document.querySelector('.search-filter input');
+    const searchButton = document.querySelector('.search-filter button:last-of-type');
+    const medicineCardsDiv = document.querySelector('.medicine-cards');
+
+    searchButton.addEventListener('click', () => {
+        const query = searchInput.value.trim();
+
+        if (query === '') {
+    fetch('/all')
+        .then(response => response.json())
+        .then(allDrugs => {
+            medicineCardsDiv.innerHTML = '';
+
+            allDrugs.forEach(drug => {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h3>${drug.name}</h3>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Description:</strong> ${drug.description || "No description available."}</p>
+                        <p><strong>Price:</strong> <span class="price">${drug.price} INR</span></p>
+                        <button class="locate-store">Locate Store</button>
+                        <button class="toggle-details" onclick="toggleDetails(this)">▼</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <p><strong>Chemical Composition:</strong> ${drug.chemicalcomposition || "Data not available"}</p>
+                        <p><strong>Cheaper By Percentage:</strong> <span class="highlight">${drug.cheaperbypercentage || "N/A"}%</span></p>
+                        <p><strong>Similarity to Standard:</strong> <span class="highlight">${drug.similaritytostandard || "N/A"}%</span></p>
+                    </div>
+                    <div class="card-footer">GenCare</div>
+                `;
+
+                medicineCardsDiv.appendChild(card);
+            });
+        })
+        .catch(error => console.error('Error fetching all medicines:', error));
+}
+         else {
+            // Handle search query
+            fetch(`/search?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(filteredDrugs => {
+                    // Clear the existing cards
+                    medicineCardsDiv.innerHTML = '';
+
+                    // Render the filtered cards
+                    if (filteredDrugs.length > 0) {
+                        filteredDrugs.forEach(drug => {
+                            const card = document.createElement('div');
+                            card.className = 'card';
+
+                            card.innerHTML = `
+                                <div class="card-header">
+                                    <h3>${drug.name}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Description:</strong> ${drug.description || "No description available."}</p>
+                                    <p><strong>Price:</strong> <span class="price">${drug.price} INR</span></p>
+                                    <button class="locate-store">Locate Store</button>
+                                    <button class="toggle-details" onclick="toggleDetails(this)">▼</button>
+                                </div>
+                                <div class="card-details hidden">
+                                    <p><strong>Chemical Composition:</strong> ${drug.chemicalcomposition || "Data not available"}</p>
+                                    <p><strong>Cheaper By Percentage:</strong> <span class="highlight">${drug.cheaperbypercentage || "N/A"}%</span></p>
+                                    <p><strong>Similarity to Standard:</strong> <span class="highlight">${drug.similaritytostandard || "N/A"}%</span></p>
+                                </div>
+                                <div class="card-footer">GenCare</div>
+                            `;
+
+                            medicineCardsDiv.appendChild(card);
+                        });
+                    } else {
+                        medicineCardsDiv.innerHTML = '<p>No medicines found.</p>';
+                    }
+                })
+                .catch(error => console.error('Error fetching search results:', error));
+        }
+    });
+
+
+
+
+    document.querySelectorAll(".locate-store").forEach(button => {
+    button.addEventListener("click", () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const { latitude, longitude } = position.coords;
+
+                fetch(`/locate-store?lat=${latitude}&lng=${longitude}`)
+                    .then(response => response.json())
+                    .then(stores => {
+                        if (stores.length > 0) {
+                            const map = document.querySelector(".map-section iframe");
+                            const locations = stores.map(store => 
+                                `<li>${store.name}, ${store.address}</li>`).join("");
+                            
+                            document.querySelector(".map-section").innerHTML = `
+                                <h2>Nearby Jan Aushadhi Stores</h2>
+                                <ul>${locations}</ul>
+                            `;
+                            map.src = `https://www.google.com/maps/embed/v1/search?key=YOUR_GOOGLE_MAPS_API_KEY&q=Jan+Aushadhi&center=${latitude},${longitude}`;
+                        } else {
+                            alert("No nearby stores found.");
+                        }
+                    })
+                    .catch(error => console.error("Error locating stores:", error));
+            });
+        } else {
+            alert("Geolocation is not supported by your browser.");
+        }
+    });
+});
+
+</script>
+
+
 </html>

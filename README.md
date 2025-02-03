@@ -1,6 +1,8 @@
 # GenCare
 GenCare is a web application designed to raise awareness about generic medicines and make them more accessible. The platform educates users about affordable alternatives to branded medications, providing reliable information to empower informed healthcare decisions.
 
+## this project is made in colaboration with shashianand25 ,the idea for this project was brainstromed by shashianand25 , my part was executing it . this is a copied version of the project . you can also visit https://github.com/shashianand25/GenCare to view the original code which was written during the hackathon.
+
 # Generic Medicine Awareness Web Application  
 
 ## Project Description  

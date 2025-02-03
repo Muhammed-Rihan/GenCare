@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generic Medicine Awareness</title>
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --background-light: #ffffff;
+            --text-light: #000000;
+            --background-dark: #121212;
+            --text-dark: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: var(--background-light);
+            color: var(--text-light);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #ffffff;
+            color: var(--primary-color);
+            border: none;
+            border-radius: 5px;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin: 1rem auto;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-decoration: none;
+            width: fit-content;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        a:hover {
+            background-color: #005f53;
+        }
+        .gray-area {
+    background-color: #fff;
+    padding-bottom: 2rem;
+}
+
+button{
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #00796b;          
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0f7e71;
+}
+.med-img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.animation-text {
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.5rem;
+}
+
+.cover-loaded {
+    width: 98vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.overlay,
+.overlay-name,
+.overlay-p {
+    position: absolute;
+    color: #3c4e3d;
+    font-size: 2.3333333333vw;
+    z-index: 1;
+    }
+
+.overlay-name{
+    top:10%;
+    left:10%;
+    font-size: 1.6rem;
+}
+
+.overlay {
+    top: 30%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    font-size: 2.3333333333vw;
+    font-family: Scto Grotesk;
+    text-align:center;
+}
+
+.overlay-p {
+    top: 50%;
+    left: 80%;
+    font-size: 14px;
+}
+
+.explanation {
+    padding: 1rem 12rem 1rem 12rem;
+
+    text-wrap: pretty;
+    background-color: #fff;
+    margin-top:-10;
+    color: #3c4e3d;
+}
+
+.explanation .what-is {
+    opacity: 0; 
+    transform: translateX(-100px); 
+    transition: opacity 3s ease, transform 3s ease;
+    font-size: 30px;
+  }
+  
+  .explanation .what-is.visible {
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+
+.explanation .content {
+    opacity: 0; 
+    transform: translateX(-6rem); 
+    transition: opacity 4s ease, transform 4s ease; 
+  }
+  
+  .explanation .content.visible {
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+  
+  .core-attributes {
+    text-align: center;
+    margin: 3rem 0;
+    opacity: 0; 
+    transform: translateY(3rem);
+    transition: all 0.6s ease-out;
+  }
+  
+  .core-attributes.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  
+  .core-attributes h1 {
+    font-size: 2em;
+    margin-bottom: 1.5rem;
+  }
+  
+  .boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    justify-items: center;
+  }
+  
+  .box {
+    width: 25rem;
+    height: 10rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 1.2em;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s ease;
+    border-radius: 2rem;
+    border: 0.1rem solid black;
+    margin:0;
+    background-color: #00796b;
+  }
+  
+  .top-left {
+    transform-origin: left center;
+  }
+  
+  .top-center {
+    transform-origin: top center;
+  }
+  
+  .top-right {
+    transform-origin: right center;
+  }
+  
+  .bottom-left {
+    transform-origin: left bottom;
+  }
+  
+  .bottom-center {
+    transform-origin: bottom center;
+  }
+  
+  .bottom-right {
+    transform-origin: right bottom;
+  }
+  
+  .box.show {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .box.top-left.show {
+    animation: slideInFromLeft 2s forwards;
+  }
+  
+  .box.top-center.show {
+    animation: slideInFromTop 2s forwards;
+  }
+  
+  .box.top-right.show {
+    animation: slideInFromRight 2s forwards;
+  }
+  
+  .box.bottom-left.show {
+    animation: slideInFromLeft 2s forwards;
+  }
+  
+  .box.bottom-center.show {
+    animation: slideInFromBottom 2s forwards;
+  }
+  
+  .box.bottom-right.show {
+    animation: slideInFromRight 2s forwards;
+  }
+  
+  @keyframes slideInFromLeft {
+    from {
+      transform: translateX(-100%) scale(0.8);
+    }
+    to {
+      transform: translateX(0) scale(1);
+    }
+  }
+  
+  @keyframes slideInFromTop {
+    from {
+      transform: translateY(-100%) scale(0.8);
+    }
+    to {
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%) scale(0.8);
+    }
+    to {
+      transform: translateX(0) scale(1);
+    }
+  }
+  
+  @keyframes slideInFromBottom {
+    from {
+      transform: translateY(100%) scale(0.8);
+    }
+    to {
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  .animation-container {
+    border: 0.1rem solid #e7e4df;
+    height: 13rem;
+
+  }
+  .did-you-know {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    margin: 1rem 0;
+    height: 3rem;
+  }
+  
+  #dynamic-text {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeIn 3s ease-in-out forwards;
+    white-space: nowrap;
+  }
+  
+  .additional-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:2rem;
+    opacity: 0;
+    transition: opacity 1s;
+  }
+
+  .paracetamol img {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: transform 1s ease, opacity 1s ease;
+  }
+  
+  .additional-text.show {
+    opacity: 1;
+  }
+  
+  .additional-text.show .paracetamol img {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+
+.header {
+    text-align: center;
+    background-color: #fff;
+    padding: 2rem 1rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.highlight {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.about {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.intro, .story {
+    margin: 1rem 0;
+}
+
+.founders {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.founder {
+    text-align: center;
+}
+
+.founder-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.mission {
+    text-align: center;
+    background-color: #f7b5a6;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Generic Medicine Awareness</h1>
+        <div class="toggle-container">
+            <label for="dark-mode-toggle">Dark Mode</label>
+            <button class="toggle-button" id="dark-mode-toggle">Toggle</button>
+        </div>
+    </header>
+    <main>
+        <div class="explanation">
+            <div class="what-is">
+                <h1>What is generic medicine?</h1>
+            </div>
+            <div class="content">
+                Generic medicine refers to a pharmaceutical product that is equivalent to a brand-name drug in terms of dosage, strength, administration, quality, and intended use. The key difference is that generic medicines are typically sold under their chemical name rather than a brand name, and they are often much more affordable than branded versions.<br><br>
+                Generic medicines contain the same active ingredient as the branded version, ensuring they have the same therapeutic effect. This means that whether you take a branded drug or its generic equivalent, you can expect the same results in terms of treatment. The main difference lies in the cost, as generics are significantly cheaper due to the lower costs associated with producing and distributing them.<br><br>
+                Finally, one benefit of choosing a generic drug is its lower cost. Since generic manufacturers do not need to invest in costly research or marketing, they can sell the medication at a much lower price than branded drugs. This makes generic medicines a more accessible option for patients, especially for chronic conditions that require long-term treatment.<br><br>
+            </div>
+        </div>
+        <div class="core-attributes">
+            <div class="attributes">
+                <h2>FEATURES</h2>
+                <h1 class="core" style="font-size: 4rem; font-weight: bold;">Core Attributes</h1>
+            </div>
+            <div class="boxes">
+                <div class="box top-left">
+                    <h3>Affordable Pricing</h3>
+                    <p>Generic medicines offer the same therapeutic effects as branded versions, but at a much lower cost.</p>
+                </div>
+                <div class="box top-center">
+                    <h3>Same Active Ingredients</h3>
+                    <p>Generic medicines contain the same active ingredients as their branded counterparts, ensuring they deliver the same quality.</p>
+                </div>
+                <div class="box top-right">
+                    <h3>Regulated</h3>
+                    <p>Generic drugs are rigorously tested and must meet the same regulatory standards as branded medicines.</p>
+                </div>
+                <div class="box bottom-left">
+                    <h3>Safe to use</h3>
+                    <p>Generic medicines have the same safety standards as branded ones.</p>
+                </div>
+                <div class="box bottom-center">
+                    <h3>No Compromise on Quality</h3>
+                    <p>Despite being cheaper, generic medicines maintain high manufacturing standards.</p>
+                </div>
+                <div class="box bottom-right">
+                    <h3>Faster Market Entry</h3>
+                    <p>Generic versions can quickly enter the market, making medications more accessible.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        const toggleButton = document.getElementById('dark-mode-toggle');
+        const root = document.documentElement;
+
+        toggleButton.addEventListener('click', () => {
+            if (root.style.getPropertyValue('--background-light') === '#121212') {
+                root.style.setProperty('--background-light', '#ffffff');
+                root.style.setProperty('--text-light', '#000000');
+            } else {
+                root.style.setProperty('--background-light', '#121212');
+                root.style.setProperty('--text-light', '#ffffff');
+            }
+        });
+
+        function isInView(element) {
+    const rect = element.getBoundingClientRect();
+    return rect.top <= window.innerHeight && rect.bottom >= 0;
+  }
+  
+  window.addEventListener('scroll', function() {
+    const whatIs = document.querySelector('.what-is');
+    const content = document.querySelector('.content');
+    
+    if (isInView(whatIs)) {
+      whatIs.classList.add('visible');
+    }
+    
+    if (isInView(content)) {
+      content.classList.add('visible');
+    }
+  });
+  
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show'); 
+    }
+  });
+}, { threshold: 0.5 }); 
+
+observer.observe(document.querySelector('.core-attributes'));
+
+document.querySelectorAll('.box').forEach(box => {
+  observer.observe(box);
+});
+
+const text = "Did you know?";
+const textElement = document.getElementById("dynamic-text");
+let index = 0;
+let typingStarted = false;
+
+function typeLetterByLetter() {
+  if (index < text.length) {
+    textElement.textContent += text.charAt(index);
+    index++;
+    setTimeout(typeLetterByLetter, 250); 
+  }
+}
+
+function isInView(element) {
+  const rect = element.getBoundingClientRect();
+  return rect.top <= window.innerHeight && rect.bottom >= 0;
+}
+
+window.addEventListener('scroll', function() {
+  const didYouKnowSection = document.querySelector(".did-you-know");
+
+  if (isInView(didYouKnowSection) && !typingStarted) {
+    typingStarted = true; 
+    didYouKnowSection.classList.add("visible");
+    typeLetterByLetter(); 
+  }
+});
+
+function isInView(element) {
+    const rect = element.getBoundingClientRect();
+    return rect.top <= window.innerHeight && rect.bottom >= 0;
+  }
+  
+  window.addEventListener('scroll', function() {
+    const additionalText = document.querySelector('.additional-text');
+    
+    if (isInView(additionalText)) {
+      setTimeout(function() {
+        additionalText.classList.add('show');
+      }, 1000); // 4 seconds delay before adding 'show'
+    }
+  })
+    </script>
+</body>
+</html>

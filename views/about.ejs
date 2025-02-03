@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - GenCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --secondary-color: #004d40;
+            --text-color: #333;
+            --background-color: #f4f4f4;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: space-between;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .about-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .about-text {
+            flex: 1 1 60%;
+        }
+
+        .about-text p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .about-image {
+            flex: 1 1 35%;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem 0;
+            background-color: var(--secondary-color);
+            color: white;
+            font-size: 0.9rem;
+        }
+.med-img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.animation-text {
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.5rem;
+}
+
+.cover-loaded {
+    width: 98vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.overlay,
+.overlay-name,
+.overlay-p {
+    position: absolute;
+    color: #3c4e3d;
+    font-size: 2.3333333333vw;
+    z-index: 1;
+    }
+
+.overlay-name{
+    top:10%;
+    left:10%;
+    font-size: 1.6rem;
+}
+
+.overlay {
+    top: 30%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    font-size: 2.3333333333vw;
+    font-family: Scto Grotesk;
+    text-align:center;
+}
+
+.overlay-p {
+    top: 50%;
+    left: 80%;
+    font-size: 14px;
+}
+
+.explanation {
+    padding: 1rem 12rem 1rem 12rem;
+
+    text-wrap: pretty;
+    background-color: #e7e4df;
+    margin-top:-10;
+    color: #3c4e3d;
+}
+
+.explanation .what-is {
+    opacity: 0; 
+    transform: translateX(-100px); 
+    transition: opacity 3s ease, transform 3s ease;
+    font-size: 30px;
+  }
+  
+  .explanation .what-is.visible {
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+
+.explanation .content {
+    opacity: 0; 
+    transform: translateX(-6rem); 
+    transition: opacity 4s ease, transform 4s ease; 
+  }
+  
+  .explanation .content.visible {
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+  
+  .core-attributes {
+    text-align: center;
+    margin: 3rem 0;
+    opacity: 0; 
+    transform: translateY(3rem);
+    transition: all 0.6s ease-out;
+  }
+  
+  .core-attributes.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  
+  .core-attributes h1 {
+    font-size: 2em;
+    margin-bottom: 1.5rem;
+  }
+  
+  .boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    justify-items: center;
+  }
+  
+  .box {
+    width: 28vw;
+    height: 27vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 1.2em;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s ease;
+    border-radius: 2rem;
+    border: 0.1rem solid black;
+    margin:0;
+    background-color: #00796b;
+  } 
+  .top-left {
+    transform-origin: left center;
+  }
+  
+  .top-center {
+    transform-origin: top center;
+  }
+  
+  .top-right {
+    transform-origin: right center;
+  }
+  
+  .bottom-left {
+    transform-origin: left bottom;
+  }
+  
+  .bottom-center {
+    transform-origin: bottom center;
+  }
+  
+  .bottom-right {
+    transform-origin: right bottom;
+  }
+  
+  .box.show {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .box.top-left.show {
+    animation: slideInFromLeft 2s forwards;
+  }
+  
+  .box.top-center.show {
+    animation: slideInFromTop 2s forwards;
+  }
+  
+  .box.top-right.show {
+    animation: slideInFromRight 2s forwards;
+  }
+  
+  .box.bottom-left.show {
+    animation: slideInFromLeft 2s forwards;
+  }
+  
+  .box.bottom-center.show {
+    animation: slideInFromBottom 2s forwards;
+  }
+  
+  .box.bottom-right.show {
+    animation: slideInFromRight 2s forwards;
+  }
+  
+  @keyframes slideInFromLeft {
+    from {
+      transform: translateX(-100%) scale(0.8);
+    }
+    to {
+      transform: translateX(0) scale(1);
+    }
+  }
+  
+  @keyframes slideInFromTop {
+    from {
+      transform: translateY(-100%) scale(0.8);
+    }
+    to {
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%) scale(0.8);
+    }
+    to {
+      transform: translateX(0) scale(1);
+    }
+  }
+  
+  @keyframes slideInFromBottom {
+    from {
+      transform: translateY(100%) scale(0.8);
+    }
+    to {
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  
+  #dynamic-text {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeIn 3s ease-in-out forwards;
+    white-space: nowrap;
+  }
+  
+  .additional-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:2rem;
+    opacity: 0;
+    transition: opacity 1s;
+  }
+
+  .paracetamol img {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: transform 1s ease, opacity 1s ease;
+  }
+  
+  .additional-text.show {
+    opacity: 1;
+  }
+  
+  .additional-text.show .paracetamol img {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+
+.header {
+    text-align: center;
+    background-color: #f7b5a6;
+    padding: 2rem 1rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.highlight {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.about {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+body.dark-mode header {
+    background: linear-gradient(45deg, #1f4037, #99f2c8);
+}
+
+body.dark-mode nav a {
+    color: #b3ffab;
+}
+body.dark-mode .about-section {
+    background-color: #1e1e1e;
+    color: white;
+}
+body.dark-mode .explanation{
+    background-color: #1e1e1e;
+    color: #00796b;
+}
+body.dark-mode .content{
+    color: white;
+}
+
+
+body.dark-mode footer {
+    background-color: #1f4037;
+}
+
+button{
+    position: absolute;
+    right: 3px;
+    top: 100px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #00796b;          
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0f7e71;
+}
+
+</style>
+
+<link rel="icon" href="assets/favicon.png" type="image/png">
+</head>
+<body>
+    <div class="empty">
+
+    </div>
+    <header>
+        About Us - GenCare
+    </header>
+    <button id="dark-mode-toggle">Dark Mode</button>
+
+    <div class="container">
+        <div class="about-section">
+            <h2>Who We Are</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>At GenCare, we are committed to empowering individuals with easy access to affordable and generic medicines. Our mission is to bridge the gap between quality healthcare and cost-effective solutions by providing transparent information and innovative tools.</p>
+                    <p>We believe that healthcare is a right, not a privilege. Through our platform, we strive to create awareness, simplify choices, and make medicine accessible to everyone, everywhere.</p>
+                </div>
+                <div class="about-image">
+                    <img src="assets/favicon.png" alt="Team working together">
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    
+</section>
+    <footer>
+        &copy; 2024 GenCare. All rights reserved.
+    </footer>
+</body>
+
+<script>
+
+    //js for darkmode
+
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+
+    
+</script>
+</html>

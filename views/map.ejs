@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jan Aushadhi Centers Map</title>
+  <style>
+    body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Jan Aushadhi Centers in major cities</h1>
+  <div id="map"></div>
+
+  <!-- Google Maps API Script -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDq3OveM6a3WSxOiOWVuEVh2MWThWMKopc&callback=initMap">
+  </script>
+
+  <script>
+    function initMap() {
+      // Create the map centered on India
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 20.5937, lng: 78.9629 }, // Coordinates for India
+        zoom: 5,
+      });
+
+      // List of Jan Aushadhi Center locations
+      const locations = [
+    { name: "Jan Aushadhi Center 1", lat: 28.6139, lng: 77.2090 }, // Delhi
+    { name: "Jan Aushadhi Center 2", lat: 19.0760, lng: 72.8777 }, // Mumbai
+    { name: "Jan Aushadhi Center 3", lat: 13.0827, lng: 80.2707 }, // Chennai
+    { name: "Jan Aushadhi Center 4", lat: 22.5726, lng: 88.3639 }, // Kolkata
+    { name: "Jan Aushadhi Center 5", lat: 12.9716, lng: 77.5946 }, // Bengaluru
+    { name: "Jan Aushadhi Center 6", lat: 26.8467, lng: 80.9462 }, // Lucknow
+    { name: "Jan Aushadhi Center 7", lat: 23.2599, lng: 77.4126 }, // Bhopal
+    { name: "Jan Aushadhi Center 8", lat: 17.385044, lng: 78.486671 }, // Hyderabad
+    { name: "Jan Aushadhi Center 9", lat: 18.5204, lng: 73.8567 }, // Pune
+    { name: "Jan Aushadhi Center 10", lat: 23.0225, lng: 72.5714 }, // Ahmedabad
+];
+
+
+      // Add markers for each location
+      locations.forEach((location) => {
+        new google.maps.Marker({
+          position: { lat: location.lat, lng: location.lng },
+          map: map,
+          title: location.name, // Marker tooltip
+        });
+      });
+    }
+  </script>
+</body>
+</html>
